@@ -1,10 +1,10 @@
 package com.taller1_pdpe
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
+import androidx.core.view.WindowCompat
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -13,17 +13,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.taller1_pdpe.ui.theme.Taller1_PDPETheme
+import android.content.Intent
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             Taller1_PDPETheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -39,10 +41,12 @@ fun MainContent(modifier: Modifier = Modifier) {
     var name by remember { mutableStateOf("") }
     var savedName by remember { mutableStateOf("") }
     val context = LocalContext.current
+    val backgroundColor = getSavedColor(context)
 
     Column(
         modifier = modifier
             .fillMaxSize()
+            .background(backgroundColor)
             .padding(16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
