@@ -1,16 +1,23 @@
 package com.taller1_pdpe
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.taller1_pdpe.ui.theme.Taller1_PDPETheme
 
 class MainActivity : ComponentActivity() {
@@ -20,10 +27,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             Taller1_PDPETheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    MainContent(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -31,17 +35,50 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
+fun MainContent(modifier: Modifier = Modifier) {
+    var name by remember { mutableStateOf("") }
+    var savedName by remember { mutableStateOf("") }
+    val context = LocalContext.current
+
+    Column(
         modifier = modifier
-    )
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        if (savedName.isNotEmpty()) {
+            Text(
+                text = "Hola $savedName, gracias por usar mi aplicación",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Introduzca su nombre") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = { savedName = name }) {
+            Text("Guardar Nombre")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            val intent = Intent(context, TerceraPantalla::class.java)
+            context.startActivity(intent)
+        }) {
+            Text("Ir a Configuración")
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun MainContentPreview() {
     Taller1_PDPETheme {
-        Greeting("Android")
+        MainContent()
     }
 }
