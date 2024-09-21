@@ -14,8 +14,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.taller1_pdpe.ui.theme.Taller1_PDPETheme
 
 class MainActivity : ComponentActivity() {
@@ -45,10 +47,18 @@ fun MainContent(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        if (savedName.isNotEmpty()) {
+            Text(
+                text = "Hola $savedName, gracias por usar mi aplicación",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
         OutlinedTextField(
             value = name,
             onValueChange = { name = it },
-            label = { Text("Ingrese su nombre") },
+            label = { Text("Introduzca su nombre") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -56,13 +66,11 @@ fun MainContent(modifier: Modifier = Modifier) {
             Text("Guardar Nombre")
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "Nombre guardado: $savedName")
-        Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
             val intent = Intent(context, TerceraPantalla::class.java)
             context.startActivity(intent)
         }) {
-            Text("Ir a la Tercera Pantalla")
+            Text("Ir a Configuración")
         }
     }
 }
