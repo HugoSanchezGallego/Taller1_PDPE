@@ -13,11 +13,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.taller1_pdpe.ui.theme.Taller1_PDPETheme
-import androidx.compose.ui.graphics.toArgb
 
 class TerceraPantalla : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +34,7 @@ class TerceraPantalla : ComponentActivity() {
 fun TerceraPantallaContent() {
     val context = LocalContext.current
     var backgroundColor by remember { mutableStateOf(getSavedColor(context)) }
+    val defaultColor = Color.White
 
     Column(
         modifier = Modifier
@@ -64,6 +65,13 @@ fun TerceraPantallaContent() {
             saveColor(context, backgroundColor)
         }) {
             Text("Cambiar a Azul")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            backgroundColor = defaultColor
+            saveColor(context, backgroundColor)
+        }) {
+            Text("Restablecer a Predeterminado")
         }
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
