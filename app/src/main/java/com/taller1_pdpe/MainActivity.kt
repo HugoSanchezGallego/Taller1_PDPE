@@ -21,8 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.taller1_pdpe.ui.theme.Taller1_PDPETheme
 import android.content.Intent
+import CombinedTask
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
@@ -75,6 +77,12 @@ fun MainContent(modifier: Modifier = Modifier) {
             context.startActivity(intent)
         }) {
             Text("Ir a Configuración")
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Button(onClick = {
+            CombinedTask(context).execute()
+        }) {
+            Text("Iniciar Operación Combinada")
         }
     }
 }
