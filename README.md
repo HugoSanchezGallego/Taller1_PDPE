@@ -49,4 +49,8 @@ En la `TerceraPantalla`, el usuario puede cambiar el color de fondo de la aplica
 - `saveColor(context: Context, color: Color)`: Guarda el color de fondo seleccionado en `SharedPreferences`.
 - `getSavedColor(context: Context): Color`: Recupera el color de fondo guardado en `SharedPreferences`.
 
+### Taller 2
+- A partir de la rama "Asincrono" empieza el Taller 2
 
+- Se creó una nueva clase CombinedTask que extiende AsyncTask para simular una operación de red y mostrar el progreso.
+- Se modificó MainActivity para usar CombinedTask en un solo botón para iniciar la tarea en segundo plano.
